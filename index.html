@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumina Candle & Crystal - Nến Thơm Ẩn Giấu Tinh Thể Phong Thủy</title>
+  <meta name="description" content="Thương hiệu nến thơm chữa lành ẩn giấu 1-2 viên đá phong thủy tự nhiên. Quét mã QR trên nắp nến để giải mã năng lượng và ý nghĩa vũ trụ.">
+  <meta name="keywords" content="nến thơm, nến thơm giấu đá, đá phong thủy, thạch anh hồng, thạch anh tím, healing candle, crystal candle, id.vn">
+  
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Sticky Header Nav -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo-brand">
+        <div class="logo-icon">✨</div>
+        <div class="logo-text">
+          <h1>LUMINA</h1>
+          <p>CANDLE & CRYSTAL</p>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="active">Trang Chủ</a></li>
+        <li><a href="#demo-melt">Đốt Nến Ảo</a></li>
+        <li><a href="#products">Bộ Sưu Tập</a></li>
+        <li><a href="#quiz">Quiz Chọn Đá</a></li>
+        <li><a href="#qr-builder">Tạo QR Nắp Nến</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="cart-btn-trigger" onclick="openCartModal()">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span>Giỏ Hàng</span>
+          <span class="cart-badge" id="cart-badge-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="container hero-section" id="hero">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span>✨</span> Kết hợp Nến Thơm Healing & Đá Phong Thủy Năng Lượng
+      </div>
+      <h2>Bí Mật Dưới Mỗi <span>Lớp Sáp Nến</span></h2>
+      <p>Mỗi cốc nến thơm Lumina không chỉ mang lại hương thơm thư thái dễ chịu mà bên trong sáp đậu nành tự nhiên còn ẩn chứa 1 đến 2 viên đá quý tự nhiên mang tần số năng lượng riêng biệt. Quét mã QR trên nắp nến để giải mã thông điệp dành riêng cho bạn!</p>
+      
+      <div class="hero-buttons">
+        <a href="#products" class="btn-primary">
+          <i class="fa-solid fa-fire-flame-curved"></i> Khám Phá Nến Ngay
+        </a>
+        <a href="#demo-melt" class="btn-secondary">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> Thử Đốt Nến Ảo
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <img src="assets/hero-candle.png" alt="Nến Thơm Ẩn Giấu Đá Phong Thủy Lumina">
+      <div class="hero-badge-overlay">
+        <i class="fa-solid fa-qrcode"></i>
+        <div>
+          <strong style="color: var(--primary-dark); font-size: 0.95rem;">Mã QR Quét Giải Mã Tinh Thể</strong>
+          <p style="font-size: 0.82rem; color: var(--text-muted); margin: 0;">Trải nghiệm độc đáo in trực tiếp trên nắp hộp nến</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- USP Features Section -->
+  <section class="container usp-section">
+    <div class="usp-grid">
+      <div class="usp-card">
+        <div class="usp-icon"><i class="fa-solid fa-leaf"></i></div>
+        <h4>Sáp Đậu Nành 100%</h4>
+        <p>An toàn cho sức khỏe, cháy mịn êm dịu không khói đen.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-icon"><i class="fa-solid fa-gem"></i></div>
+        <h4>Đá Tinh Thể Tự Nhiên</h4>
+        <p>Mỗi cốc nến chứa 1-2 viên đá quý chọn lọc tự nhiên.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-icon"><i class="fa-solid fa-qrcode"></i></div>
+        <h4>Mã QR Đột Phá</h4>
+        <p>Quét mã trên nắp nến ra bài viết giải mã năng lượng riêng.</p>
+      </div>
+      <div class="usp-card">
+        <div class="usp-icon"><i class="fa-solid fa-spa"></i></div>
+        <h4>Liệu Pháp Chữa Lành</h4>
+        <p>Hương thơm thư thái xoa dịu lo âu và căng thẳng.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Candle Burn Melt Demo -->
+  <section class="container" id="demo-melt">
+    <div class="burn-melt-section">
+      <div class="hero-tag" style="background: rgba(255,255,255,0.1); border-color: rgba(212,163,115,0.4); color: var(--primary-gold);">
+        <span>🔥</span> TRẢI NGHIỆM ĐỘC ĐÁO
+      </div>
+      <h2>Mô Phỏng Đốt Nến Ảo Lộ Đá Phong Thủy</h2>
+      <p>Bấm nút "Thắp Nến" bên dưới để xem quá trình sáp nến tan chảy từ từ và tiết lộ những viên đá tinh thể ẩn giấu bên trong hũ nến Lumina!</p>
+
+      <div class="candle-melt-demo" id="candle-melt-demo">
+        <div class="candle-jar-visual">
+          <div class="flame-container" id="flame-container">
+            <div class="flame"></div>
+            <div class="wick"></div>
+          </div>
+          <div class="wax-layer" id="wax-layer"></div>
+          
+          <div class="hidden-crystals-visual">
+            <div class="mini-crystal-badge">
+              <img src="assets/thach-anh-hong.png" title="Thạch Anh Hồng">
+            </div>
+            <div class="mini-crystal-badge">
+              <img src="assets/thach-anh-tim.png" title="Thạch Anh Tím">
+            </div>
+          </div>
+        </div>
+
+        <div class="melt-controls">
+          <button class="btn-primary" id="btn-start-burn">
+            <i class="fa-solid fa-fire"></i> Thắp Nến Ngay (4s)
+          </button>
+          <button class="btn-secondary" id="btn-reset-burn" style="background: transparent; color: #fff; border-color: rgba(255,255,255,0.3);">
+            <i class="fa-solid fa-rotate-left"></i> Đặt Lại
+          </button>
+        </div>
+
+        <div class="melt-status-msg" id="melt-status-msg">
+          Thắp nến để bắt đầu trải nghiệm khám phá đá ẩn bên trong!
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Collection Section -->
+  <section class="container" id="products" style="padding-top: 2rem;">
+    <div class="section-header">
+      <span class="hero-tag">🌸 BỘ SƯU TẬP CANDLE & CRYSTAL</span>
+      <h2>Nến Thơm Ẩn Tinh Thể Năng Lượng</h2>
+      <p>Chọn lựa cốc nến mang tầng hương thơm và loại đá phù hợp với tâm hồn bạn</p>
+    </div>
+
+    <div class="product-filter">
+      <button class="filter-btn active" data-filter="all">Tất Cả Sản Phẩm</button>
+      <button class="filter-btn" data-filter="love">💗 Tình Yêu & Chữa Lành</button>
+      <button class="filter-btn" data-filter="peace">💜 An Yên & Giấc Ngủ</button>
+      <button class="filter-btn" data-filter="wealth">💛 Tài Lộc & Thịnh Vượng</button>
+      <button class="filter-btn" data-filter="focus">🐯 Dũng Khí & Tập Trung</button>
+    </div>
+
+    <div class="product-grid" id="product-grid">
+      <!-- Dynamically generated via script.js -->
+    </div>
+  </section>
+
+  <!-- Crystal Finder Quiz Section -->
+  <section class="container" id="quiz">
+    <div class="quiz-section">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="hero-tag">🔮 TRẮC NGHIỆM TẦN SỐ</span>
+        <h2>Tìm Nến & Đá Phù Hợp Với Bạn</h2>
+        <p>Bạn đang mong muốn kết nối hay chữa lành năng lượng nào nhất lúc này?</p>
+      </div>
+
+      <div class="quiz-card" id="quiz-box">
+        <h4 style="color: var(--primary-dark); font-size: 1.2rem; margin-bottom: 1rem;">Nhu cầu năng lượng hiện tại của bạn là gì?</h4>
+        <div class="quiz-options">
+          <button class="quiz-opt-btn" onclick="selectQuizOption('love')">
+            <span>💗</span> Thu hút Tình Yêu & Sự Tự Yêu Thương
+          </button>
+          <button class="quiz-opt-btn" onclick="selectQuizOption('peace')">
+            <span>💜</span> Giải Tỏa Stress, Tìm Lại Bình An
+          </button>
+          <button class="quiz-opt-btn" onclick="selectQuizOption('wealth')">
+            <span>💛</span> Thu Hút Tài Lộc & May Mắn Sự Nghiệp
+          </button>
+          <button class="quiz-opt-btn" onclick="selectQuizOption('focus')">
+            <span>🐯</span> Thôi Thúc Dũng Khí & Tinh Thần Quyết Đoán
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QR Code Generator Tool Section for Store Owner -->
+  <section class="container" id="qr-builder">
+    <div class="qr-builder-section">
+      <div class="qr-builder-grid">
+        <div>
+          <span class="hero-tag">📱 CÔNG CỤ TẠO MÃ QR NẮP NẾN</span>
+          <h2 style="color: var(--primary-dark); font-size: 2rem; margin: 0.8rem 0 1rem;">Tạo Mã QR Nét Cao Để In Tem Nắp Nến</h2>
+          <p style="color: var(--text-muted); margin-bottom: 1.8rem;">
+            Công cụ tích hợp sẵn giúp chủ thương hiệu Lumina gõ tên miền dạng <strong>.id.vn</strong> của mình, chọn trang con tương ứng và tải ảnh QR code HD dạng PNG để đem đi in trên tem nắp hộp/hũ nến!
+          </p>
+
+          <div class="qr-form-group">
+            <label><i class="fa-solid fa-globe"></i> Tên Miền Web Tĩnh .id.vn Của Bạn:</label>
+            <input type="text" id="qr-domain-input" class="qr-input-text" value="luminacandle.id.vn" placeholder="VD: luminacandle.id.vn">
+          </div>
+
+          <div class="qr-form-group">
+            <label><i class="fa-solid fa-gem"></i> Chọn Trang Giải Mã Đá Tương Ứng:</label>
+            <select id="qr-stone-select" class="qr-input-select">
+              <option value="da/thach-anh-hong.html">Thạch Anh Hồng (Rose Quartz)</option>
+              <option value="da/thach-anh-tim.html">Thạch Anh Tím (Amethyst)</option>
+              <option value="da/mat-ho.html">Đá Mắt Hổ (Tiger's Eye)</option>
+              <option value="da/thach-anh-trang.html">Thạch Anh Trắng (Clear Quartz)</option>
+              <option value="da/da-mat-trang.html">Đá Mặt Trăng (Moonstone)</option>
+              <option value="da/thach-anh-toc-vang.html">Thạch Anh Tóc Vàng (Rutilated Quartz)</option>
+            </select>
+          </div>
+
+          <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+            <button class="btn-primary" id="btn-generate-qr">
+              <i class="fa-solid fa-rotate"></i> Tạo Mã QR
+            </button>
+            <button class="btn-secondary" id="btn-download-qr">
+              <i class="fa-solid fa-download"></i> Tải Ảnh PNG HD
+            </button>
+          </div>
+        </div>
+
+        <div class="qr-preview-box">
+          <h4 style="color: var(--primary-dark); margin-bottom: 1rem;">Mẫu QR In Nắp Hũ Nến HD</h4>
+          <div id="qr-canvas-container">
+            <!-- Canvas rendered by script.js -->
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-muted);">
+            Khách hàng quét mã này trên nắp nến bằng Camera điện thoại sẽ tự động mở trang web giải mã tinh thể!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shopping Cart & VietQR Checkout Modal -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeCartModal()">✕</button>
+      
+      <h3 style="color: var(--primary-dark); font-size: 1.6rem; margin-bottom: 1rem;">
+        <i class="fa-solid fa-bag-shopping" style="color: var(--primary-gold);"></i> Giỏ Hàng & Đặt Hàng
+      </h3>
+
+      <div id="modal-cart-items" style="margin-bottom: 1.5rem;">
+        <!-- Cart Items -->
+      </div>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; border-top: 2px solid var(--border-gold); font-size: 1.2rem; font-weight: 700;">
+        <span>Tổng cộng:</span>
+        <span id="modal-cart-total" style="color: var(--primary-dark);">0 VNĐ</span>
+      </div>
+
+      <div class="vietqr-box">
+        <h5 style="color: var(--primary-dark); margin-bottom: 0.5rem;">Quét Mã VietQR Chuyển Khoản Tự Động</h5>
+        <img id="vietqr-image" src="" alt="Mã VietQR Thanh Toán">
+        <p style="font-size: 0.8rem; color: #777; margin-top: 0.5rem;">Ngân hàng: MBBank | STK: 0987654321 | Cú pháp tự động</p>
+      </div>
+
+      <div style="margin-top: 1rem;">
+        <h4 style="color: var(--primary-dark); font-size: 1rem; margin-bottom: 0.8rem;">Thông Tin Giao Hàng:</h4>
+        <input type="text" id="customer-name" class="qr-input-text" placeholder="Họ và tên của bạn" style="margin-bottom: 0.8rem;">
+        <input type="tel" id="customer-phone" class="qr-input-text" placeholder="Số điện thoại nhận hàng" style="margin-bottom: 0.8rem;">
+        <input type="text" id="customer-address" class="qr-input-text" placeholder="Địa chỉ giao hàng chi tiết" style="margin-bottom: 1rem;">
+
+        <button class="btn-primary" style="width: 100%; text-align: center; justify-content: center;" onclick="confirmOrderZalo()">
+          <i class="fa-brands fa-whatsapp"></i> Gửi Đơn Hàng Qua Zalo Chăm Sóc
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>LUMINA CANDLE & CRYSTAL</h3>
+        <p>Thương hiệu nến thơm chữa lành ẩn giấu 1-2 viên đá tinh thể phong thủy tự nhiên. Mỗi cốc nến mang một thông điệp gửi gắm từ vũ trụ.</p>
+        <div style="margin-top: 1rem; color: var(--primary-gold); font-size: 0.88rem;">
+          <i class="fa-solid fa-shield-halved"></i> Đăng ký tên miền 0đ theo chương trình VNNIC cho giới trẻ 18-23 tuổi.
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Trang Tĩnh QR Đá</h4>
+        <ul>
+          <li><a href="da/thach-anh-hong.html">Thạch Anh Hồng</a></li>
+          <li><a href="da/thach-anh-tim.html">Thạch Anh Tím</a></li>
+          <li><a href="da/mat-ho.html">Đá Mắt Hổ</a></li>
+          <li><a href="da/thach-anh-trang.html">Thạch Anh Trắng</a></li>
+          <li><a href="da/da-mat-trang.html">Đá Mặt Trăng</a></li>
+          <li><a href="da/thach-anh-toc-vang.html">Thạch Anh Tóc Vàng</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên Kết Fast</h4>
+        <ul>
+          <li><a href="#hero">Trang chủ</a></li>
+          <li><a href="#demo-melt">Đốt nến ảo</a></li>
+          <li><a href="#products">Sản phẩm</a></li>
+          <li><a href="#quiz">Quiz chọn đá</a></li>
+          <li><a href="#qr-builder">Tạo QR nắp nến</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Liên Hệ Store</h4>
+        <p style="color: #A39691; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-location-dot"></i> Hà Nội / TP. Hồ Chí Minh, Việt Nam</p>
+        <p style="color: #A39691; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-envelope"></i> contact@luminacandle.id.vn</p>
+        <p style="color: #A39691; font-size: 0.9rem;"><i class="fa-solid fa-phone"></i> Hotline: 0987.654.321</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      &copy; 2026 Lumina Candle & Crystal. Bản quyền thuộc về thương hiệu. Đã hỗ trợ Deploy Vercel / Cloudflare Pages.
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
