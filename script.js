@@ -252,7 +252,7 @@ function initQRGenerator() {
     ctx.fillStyle = '#9D6B53';
     ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('LUMINA CRYSTAL GUIDE', 130, 32);
+    ctx.fillText('VELUNE CRYSTAL GUIDE', 130, 32);
 
     // Draw stylized QR pattern box
     const qrSize = 180;
@@ -417,8 +417,8 @@ window.openCartModal = function() {
     // Generate VietQR Quick Link Demo
     const bankId = 'MB'; // MBBank demo
     const accountNo = '0987654321'; // Account demo
-    const accountName = 'LUMINA CANDLE STORE';
-    const addInfo = encodeURIComponent(`Lumina Order ${Math.floor(1000 + Math.random() * 9000)}`);
+    const accountName = 'VELUNE STORE';
+    const addInfo = encodeURIComponent(`VELUNE Order ${Math.floor(1000 + Math.random() * 9000)}`);
     qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNo}-compact2.png?amount=${total}&addInfo=${addInfo}&accountName=${encodeURIComponent(accountName)}`;
   }
 
@@ -446,7 +446,7 @@ window.confirmOrderZalo = function() {
   const address = document.getElementById('customer-address').value || '';
 
   const orderText = cart.map(i => `- ${i.title} (${i.crystalName})`).join('%0A');
-  const zaloUrl = `https://zalo.me/?text=${encodeURIComponent(`Xin chào Lumina Candle! Tôi muốn đặt hàng:%0A${orderText}%0AHọ tên: ${name}%0ASĐT: ${phone}%0AĐịa chỉ: ${address}`)}`;
+  const zaloUrl = `https://zalo.me/?text=${encodeURIComponent(`Xin chào VELUNE Candle! Tôi muốn đặt hàng:%0A${orderText}%0AHọ tên: ${name}%0ASĐT: ${phone}%0AĐịa chỉ: ${address}`)}`;
   
   window.open(zaloUrl, '_blank');
 };

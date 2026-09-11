@@ -86,32 +86,33 @@ header {
   color: var(--primary-dark);
 }
 
-.logo-icon {
-  width: 42px;
-  height: 42px;
-  background: linear-gradient(135deg, var(--primary-gold), var(--primary));
+.brand-logo-img {
+  height: 50px;
+  width: 50px;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.4rem;
-  box-shadow: 0 4px 12px rgba(212, 163, 115, 0.4);
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(157, 107, 83, 0.25);
+  transition: var(--transition);
+}
+
+.logo-brand:hover .brand-logo-img {
+  transform: scale(1.08);
 }
 
 .logo-text h1 {
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   line-height: 1.1;
-  color: var(--primary-dark);
+  color: #543D2B;
+  font-family: 'Playfair Display', serif;
 }
 
 .logo-text p {
   font-size: 0.72rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--primary-gold);
+  font-style: italic;
+  letter-spacing: 0.5px;
+  color: #7A5C43;
 }
 
 .nav-links {
