@@ -227,99 +227,84 @@ function initQRGenerator() {
   if (!generateBtn) return;
 
   function renderQR() {
-    const domain = domainInput.value.trim() || 'yourdomain.id.vn';
+    const domain = domainInput.value.trim() || 'velune.id.vn';
     const subpath = stoneSelect.value;
     const fullUrl = `https://${domain.replace(/^https?:\/\//, '')}/${subpath}`;
 
     container.innerHTML = '';
-    
-    // Create HTML5 Canvas QR code visualization
-    const canvas = document.createElement('canvas');
-    canvas.width = 260;
-    canvas.height = 320;
-    const ctx = canvas.getContext('2d');
 
-    // Background
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(0, 0, 260, 320);
+    // Create temporary container for QRCode.js generator
+    const qrHolder = document.createElement('div');
+    qrHolder.style.display = 'none';
+    document.body.appendChild(qrHolder);
 
-    // Frame border
-    ctx.strokeStyle = '#D4A373';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(8, 8, 244, 304);
-
-    // Header text
-    ctx.fillStyle = '#9D6B53';
-    ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
-    ctx.textAlign = 'center';
-    ctx.fillText('VELUNE CRYSTAL GUIDE', 130, 32);
-
-    // Draw stylized QR pattern box
-    const qrSize = 180;
-    const startX = 40;
-    const startY = 48;
-
-    ctx.fillStyle = '#FAF7F2';
-    ctx.fillRect(startX, startY, qrSize, qrSize);
-    ctx.strokeStyle = '#E8DFD5';
-    ctx.lineWidth = 1;
-    ctx.strokeRect(startX, startY, qrSize, qrSize);
-
-    // Simple robust matrix grid visualization representing URL data
-    const cells = 15;
-    const cellSize = qrSize / cells;
-
-    // Seed hash from fullUrl
-    let hash = 0;
-    for (let i = 0; i < fullUrl.length; i++) {
-      hash = (hash << 5) - hash + fullUrl.charCodeAt(i);
-      hash |= 0;
+    // Render 100% standard scannable QR code
+    if (typeof QRCode !== 'undefined') {
+      new QRCode(qrHolder, {
+        text: fullUrl,
+        width: 180,
+        height: 180,
+        colorDark: "#2C2523",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.H
+      });
     }
 
-    ctx.fillStyle = '#2C2523';
+    setTimeout(() => {
+      const qrCanvasSource = qrHolder.querySelector('canvas') || qrHolder.querySelector('img');
 
-    // Corner Finder Patterns (standard QR markers)
-    drawFinderPattern(ctx, startX + 5, startY + 5, cellSize * 3);
-    drawFinderPattern(ctx, startX + qrSize - cellSize * 3 - 5, startY + 5, cellSize * 3);
-    drawFinderPattern(ctx, startX + 5, startY + qrSize - cellSize * 3 - 5, cellSize * 3);
+      // Create final high-res branded card canvas
+      const canvas = document.createElement('canvas');
+      canvas.width = 260;
+      canvas.height = 340;
+      const ctx = canvas.getContext('2d');
 
-    // Data matrix modules based on URL string
-    for (let r = 0; r < cells; r++) {
-      for (let c = 0; c < cells; c++) {
-        // Skip corner finder zones
-        if ((r < 4 && c < 4) || (r < 4 && c > cells - 5) || (r > cells - 5 && c < 4)) continue;
-        
-        let bit = (Math.abs(hash * (r + 1) * (c + 1)) + r * 7 + c * 13) % 3 === 0;
-        if (bit) {
-          ctx.fillRect(startX + c * cellSize + 1, startY + r * cellSize + 1, cellSize - 2, cellSize - 2);
-        }
+      // Card Background
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, 260, 340);
+
+      // Gold Frame border
+      ctx.strokeStyle = '#D4A373';
+      ctx.lineWidth = 4;
+      ctx.strokeRect(8, 8, 244, 324);
+
+      // Header text
+      ctx.fillStyle = '#9D6B53';
+      ctx.font = 'bold 13px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('VELUNE CRYSTAL GUIDE', 130, 32);
+
+      // Draw the scannable QR Code onto card
+      if (qrCanvasSource) {
+        ctx.drawImage(qrCanvasSource, 40, 48, 180, 180);
       }
-    }
 
-    // Footer text on Canvas
-    ctx.fillStyle = '#6E6562';
-    ctx.font = '11px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText('Quét mã trên nắp hũ nến', 130, 252);
-    
-    ctx.fillStyle = '#9D6B53';
-    ctx.font = 'bold 10px monospace';
-    const displayPath = subpath.replace('da/', '').replace('.html', '');
-    ctx.fillText(`KEY: ${displayPath.toUpperCase()}`, 130, 272);
-    
-    ctx.fillStyle = '#D4A373';
-    ctx.font = '9px "Plus Jakarta Sans", sans-serif';
-    ctx.fillText(fullUrl.substring(0, 32) + (fullUrl.length > 32 ? '...' : ''), 130, 295);
+      // Border around QR code
+      ctx.strokeStyle = '#E8DFD5';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(40, 48, 180, 180);
 
-    container.appendChild(canvas);
-  }
+      // Footer text on Canvas
+      ctx.fillStyle = '#6E6562';
+      ctx.font = '11px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Quét mã trên nắp hũ nến VELUNE', 130, 252);
+      
+      ctx.fillStyle = '#9D6B53';
+      ctx.font = 'bold 10px monospace';
+      const displayPath = subpath.replace('da/', '').replace('.html', '');
+      ctx.fillText(`KEY: ${displayPath.toUpperCase()}`, 130, 272);
+      
+      ctx.fillStyle = '#D4A373';
+      ctx.font = '9px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(fullUrl.substring(0, 34) + (fullUrl.length > 34 ? '...' : ''), 130, 295);
 
-  function drawFinderPattern(ctx, x, y, size) {
-    ctx.fillStyle = '#2C2523';
-    ctx.fillRect(x, y, size, size);
-    ctx.fillStyle = '#FFFFFF';
-    ctx.fillRect(x + 4, y + 4, size - 8, size - 8);
-    ctx.fillStyle = '#9D6B53';
-    ctx.fillRect(x + 8, y + 8, size - 16, size - 16);
+      ctx.fillStyle = '#9D6B53';
+      ctx.font = 'italic 8px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Light your little moments.', 130, 315);
+
+      container.appendChild(canvas);
+      qrHolder.remove();
+    }, 150);
   }
 
   generateBtn.addEventListener('click', renderQR);
@@ -329,13 +314,13 @@ function initQRGenerator() {
     const canvas = container.querySelector('canvas');
     if (!canvas) return;
     const link = document.createElement('a');
-    link.download = `QR-Lumina-${stoneSelect.value.replace('da/', '').replace('.html', '')}.png`;
+    link.download = `QR-VELUNE-${stoneSelect.value.replace('da/', '').replace('.html', '')}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
   });
 
   // Initial render
-  renderQR();
+  setTimeout(renderQR, 300);
 }
 
 /* -------------------------------------------------------------
