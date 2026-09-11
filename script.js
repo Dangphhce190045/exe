@@ -465,19 +465,41 @@ ${itemsText}
 🏠 Địa chỉ giao hàng: ${address}
 💳 Ngân hàng: TPBank (0000 6254 663 - NGUYEN THI BICH PHUNG)`;
 
-  // Copy order text to clipboard for convenience
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(fullOrderMsg).catch(() => {});
-  }
+  // Copy order text to clipboard for convenience with fallback
+  copyToClipboard(fullOrderMsg);
 
   // Open Zalo chat directly to Hotline 0907702656
   const zaloStoreUrl = `https://zalo.me/0907702656`;
   window.open(zaloStoreUrl, '_blank');
 
-  showToast('Đã mở Zalo 0907.702.656 & tự động sao chép đơn hàng VELUNE!');
+  alert(`✅ ĐÃ SAO CHÉP CHI TIẾT ĐƠN HÀNG VELUNE!\n\n👉 Bạn hãy nhấn nút "Nhắn tin" màu xanh trên Zalo của Phụng Nguyễn vừa mở, sau đó DÁN (Ctrl + V hoặc giữ tay Dán) nội dung đơn hàng để gửi nhé!`);
+
+  showToast('Đã sao chép đơn hàng VELUNE & mở Zalo Phụng Nguyễn (0907.702.656)!');
 
   // Reset cart after ordering
   cart = [];
   updateCartUI();
   closeCartModal();
 };
+
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).catch(() => fallbackCopyTextToClipboard(text));
+  } else {
+    fallbackCopyTextToClipboard(text);
+  }
+}
+
+function fallbackCopyTextToClipboard(text) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  textArea.style.position = "fixed";
+  textArea.style.left = "-999999px";
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+  try {
+    document.execCommand('copy');
+  } catch (err) {}
+  document.body.removeChild(textArea);
+}
