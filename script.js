@@ -185,9 +185,9 @@ function initQuiz() {
   const quizBox = document.getElementById('quiz-box');
   if (!quizBox) return;
 
-  window.selectQuizOption = function(type) {
+  window.selectQuizOption = function (type) {
     let resultProduct = PRODUCTS_DATA.find(p => p.category === type) || PRODUCTS_DATA[0];
-    
+
     quizBox.innerHTML = `
       <div style="text-align: center;">
         <span style="font-size: 3rem;">✨</span>
@@ -227,7 +227,7 @@ function initQRGenerator() {
   if (!generateBtn) return;
 
   function renderQR() {
-    const domain = domainInput.value.trim() || 'velune.id.vn';
+    const domain = domainInput.value.trim() || 'velunecandle.vercel.app';
     const subpath = stoneSelect.value;
     const fullUrl = `https://${domain.replace(/^https?:\/\//, '')}/${subpath}`;
 
@@ -288,12 +288,12 @@ function initQRGenerator() {
       ctx.fillStyle = '#6E6562';
       ctx.font = '11px "Plus Jakarta Sans", sans-serif';
       ctx.fillText('Quét mã trên nắp hũ nến VELUNE', 130, 252);
-      
+
       ctx.fillStyle = '#9D6B53';
       ctx.font = 'bold 10px monospace';
       const displayPath = subpath.replace('da/', '').replace('.html', '');
       ctx.fillText(`KEY: ${displayPath.toUpperCase()}`, 130, 272);
-      
+
       ctx.fillStyle = '#D4A373';
       ctx.font = '9px "Plus Jakarta Sans", sans-serif';
       ctx.fillText(fullUrl.substring(0, 34) + (fullUrl.length > 34 ? '...' : ''), 130, 295);
@@ -328,12 +328,12 @@ function initQRGenerator() {
 ------------------------------------------------------------- */
 let cart = [];
 
-window.addToCart = function(productId) {
+window.addToCart = function (productId) {
   const item = PRODUCTS_DATA.find(p => p.id === productId);
   if (item) {
     cart.push(item);
     updateCartUI();
-    
+
     // Toast notification
     showToast(`Đã thêm "${item.title}" vào giỏ hàng!`);
   }
@@ -366,7 +366,7 @@ function showToast(message) {
   }, 3000);
 }
 
-window.openCartModal = function() {
+window.openCartModal = function () {
   const modal = document.getElementById('checkout-modal');
   const cartItemsBox = document.getElementById('modal-cart-items');
   const totalBox = document.getElementById('modal-cart-total');
@@ -399,39 +399,85 @@ window.openCartModal = function() {
     const formattedTotal = total.toLocaleString('vi-VN') + ' VNĐ';
     totalBox.innerText = formattedTotal;
 
-    // Generate VietQR Quick Link Demo
-    const bankId = 'MB'; // MBBank demo
-    const accountNo = '0987654321'; // Account demo
-    const accountName = 'VELUNE STORE';
-    const addInfo = encodeURIComponent(`VELUNE Order ${Math.floor(1000 + Math.random() * 9000)}`);
+    // Generate TPBank VietQR Quick Link
+    const bankId = 'TPB'; // TPBank
+    const accountNo = '00006254663'; // Account NGUYEN THI BICH PHUNG
+    const accountName = 'NGUYEN THI BICH PHUNG';
+    const addInfo = encodeURIComponent(`VELUNE ${Math.floor(1000 + Math.random() * 9000)}`);
     qrImg.src = `https://img.vietqr.io/image/${bankId}-${accountNo}-compact2.png?amount=${total}&addInfo=${addInfo}&accountName=${encodeURIComponent(accountName)}`;
+    qrImg.onerror = function() {
+      this.src = 'assets/vietqr-bank.png';
+    };
   }
 
   modal.classList.add('active');
 };
 
-window.closeCartModal = function() {
+window.closeCartModal = function () {
   const modal = document.getElementById('checkout-modal');
   if (modal) modal.classList.remove('active');
 };
 
-window.removeFromCart = function(index) {
+window.removeFromCart = function (index) {
   cart.splice(index, 1);
   updateCartUI();
   openCartModal();
 };
 
-window.confirmOrderZalo = function() {
+window.confirmOrderZalo = function () {
   if (cart.length === 0) {
-    alert('Vui lòng thêm sản phẩm vào giỏ hàng trước!');
+    alert('Vui lòng thêm ít nhất 01 sản phẩm nến thơm vào giỏ hàng trước!');
     return;
   }
-  const name = document.getElementById('customer-name').value || 'Khách hàng';
-  const phone = document.getElementById('customer-phone').value || '';
-  const address = document.getElementById('customer-address').value || '';
 
-  const orderText = cart.map(i => `- ${i.title} (${i.crystalName})`).join('%0A');
-  const zaloUrl = `https://zalo.me/?text=${encodeURIComponent(`Xin chào VELUNE Candle! Tôi muốn đặt hàng:%0A${orderText}%0AHọ tên: ${name}%0ASĐT: ${phone}%0AĐịa chỉ: ${address}`)}`;
-  
-  window.open(zaloUrl, '_blank');
+  const nameInput = document.getElementById('customer-name');
+  const phoneInput = document.getElementById('customer-phone');
+  const addressInput = document.getElementById('customer-address');
+
+  const name = nameInput.value.trim();
+  const phone = phoneInput.value.trim();
+  const address = addressInput.value.trim();
+
+  if (!name || !phone || !address) {
+    alert('Vui lòng nhập đầy đủ Họ tên, Số điện thoại và Địa chỉ giao hàng để VELUNE gửi đơn cho bạn nhé!');
+    if (!name) nameInput.focus();
+    else if (!phone) phoneInput.focus();
+    else if (!address) addressInput.focus();
+    return;
+  }
+
+  let total = 0;
+  const itemsText = cart.map(item => {
+    total += item.price;
+    return `• ${item.title} (${item.crystalName}) - ${item.priceFormatted}`;
+  }).join('\n');
+
+  const totalFormatted = total.toLocaleString('vi-VN') + ' VNĐ';
+
+  const fullOrderMsg = 
+`🌸 ĐƠN HÀNG NẾN THƠM VELUNE
+------------------------------
+${itemsText}
+💰 Tổng thanh toán: ${totalFormatted}
+------------------------------
+👤 Họ và tên: ${name}
+📞 Số điện thoại: ${phone}
+🏠 Địa chỉ giao hàng: ${address}
+💳 Ngân hàng: TPBank (0000 6254 663 - NGUYEN THI BICH PHUNG)`;
+
+  // Copy order text to clipboard for convenience
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(fullOrderMsg).catch(() => {});
+  }
+
+  // Open Zalo chat directly to Hotline 0907702656
+  const zaloStoreUrl = `https://zalo.me/0907702656`;
+  window.open(zaloStoreUrl, '_blank');
+
+  showToast('Đã mở Zalo 0907.702.656 & tự động sao chép đơn hàng VELUNE!');
+
+  // Reset cart after ordering
+  cart = [];
+  updateCartUI();
+  closeCartModal();
 };
